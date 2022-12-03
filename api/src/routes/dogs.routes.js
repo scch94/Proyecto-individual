@@ -1,8 +1,30 @@
-const { Router } = require("express");
+const { Router} = require("express");
 const axios = require("axios");
-const { Raza, Temperamento } = require("../db");
+const { Raza, Temperamento,Op } = require("../db");
 
 const router = Router();
+
+router.get('/', async (req,res,next)=>{
+    let buscar=req.query.name
+    if(buscar){
+        try{
+            console.log(buscar)
+            const search=await Raza.findAll({
+                where:{
+                    name:{
+                        [Op.substring]:buscar
+                    }
+                },
+            });
+            if(search.lenght>0) return res.send(search)
+            res.status(204).send("no content")
+        }catch(e){
+            res.status(400)
+        }
+    }else{
+        next()
+    }
+})
 
 router.get("/", async (req, res) => {
     let temperamento = [];
@@ -54,13 +76,15 @@ router.get("/", async (req, res) => {
         .catch((e) => res.status(404).send("encontramos este error " + e));
 });
 
+
+
 router.post("/", async (req, res) => {
     let { name, height, weight, life_span, id, img } = req.body;
     try {
         if (!name || !height || !weight) {
         res.status(404).send("datos incompletos");
         } else {
-        let nuevo = await Raza.create({ name, height, weight, life_span, id });
+        let nuevo = await Raza.create({ name, height, weight, life_span, id ,img});
         res.send(nuevo);
         }
     } catch (e) {
