@@ -3,7 +3,7 @@ const axios = require("axios");
 const { Raza, Temperamento,Op } = require("../db");
 
 const router = Router();
-
+//get lista de raza de perros dependiendo de la palabra que envien
 router.get('/', async (req,res,next)=>{
     let buscar=req.query.name
     if(buscar){
@@ -25,6 +25,8 @@ router.get('/', async (req,res,next)=>{
         next()
     }
 })
+
+//primer llamado consulta a la api y llenado de bases de datos retorna info para llenar la pagina
 
 router.get("/", async (req, res) => {
     let temperamento = [];
@@ -76,7 +78,25 @@ router.get("/", async (req, res) => {
         .catch((e) => res.status(404).send("encontramos este error " + e));
 });
 
+router.get('/:idRaza',async (req,res)=>{
+    let {idRaza}=req.params
+    try{
+        let rasa=await Raza.findByPk(idRaza,{include:Temperamento})
+        res.send(
+            {
+                id:rasa.id,
+                name:rasa.name,
+                height:rasa.height,
+                weight:rasa.weight,
+                image:rasa.image,
+                Temperamentos:rasa.Temperamentos
+            })
+    }catch(e){
+        res.status(400).send(e)
+    }
+})
 
+//crear un perro
 
 router.post("/", async (req, res) => {
     let { name, height, weight, life_span, id, img } = req.body;
