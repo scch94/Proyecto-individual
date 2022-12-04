@@ -9,10 +9,11 @@ export const Navbar = () => {
         <>
             <div className={s.contenedor}>
                 <div className={s.navbar}>
-                    <img className={s.logo} src={ñ} alt="perros" />
+                    <img className={s.logo} href="#"  src={ñ} alt="perros" />
                     <ul>
                         <li><Link to='/'>home</Link></li>
                         <li><Link to='/dogs'>razas</Link></li>
+                        <li><Link to='/crear'>crear</Link></li>
                         <li>about us</li>
                     </ul>
                 </div>

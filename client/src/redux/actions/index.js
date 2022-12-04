@@ -14,10 +14,9 @@ export const getTemperaments=()=>dispatch=>{
     )
 }
 
-export const getDogsById=(id)=>dispatch=>{
-    return(
-        fetch(`http://localhost:3001/dogs/${id}`)
-        .then(response=>response.json())
-        .then(perro=>dispatch({type:'GET_BY_ID',payload:perro}))
-    )
+export const putImg=(img)=>{
+    return({
+        type:'IMG',
+        payload:img
+    })
 }

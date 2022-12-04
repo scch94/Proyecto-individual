@@ -3,25 +3,23 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
-export const Raza = () => {
+export const Raza =({razas}) => {
     let [raza,setRaza]=useState()
-    let [img,setImg]=useState()
     let {id}=useParams()
-    console.log(id)
-    let razas=useSelector(state=>state.dogs)
+    let img=useSelector(state=>state.dog)
+    // setImg(a)
     useEffect(()=>{
         fetch(`http://localhost:3001/dogs/${id}`)
         .then(response=>response.json())
         .then(perro=>{
             setRaza(perro)
-            setImg(razas.find((f)=>f.id===id))
         })
-    },[])
+    },[id])
     return (
         <div>
             {
-                raza?(<div>probando
-                    {/* <img src={img.image} alt={raza.name} /> */}
+                raza&&img!==""?(<div>
+                    <img src={img} alt={raza.name} />
                     <div>
                         <h4>{raza.name}</h4>
                         <p>{raza.temperament}</p>

@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, } from 'react';
+import { useDispatch,useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { Crear } from './components/crear/Crear';
 import { Error404 } from './components/error/Error404';
@@ -11,6 +11,7 @@ import * as actions from './redux/actions/index'
 
 function App() {
   let dispatch=useDispatch();
+  let razas=useSelector(state=>state.dogs)
   useEffect(()=>{
     dispatch(actions.getDogs())
     dispatch(actions.getTemperaments())
@@ -21,7 +22,7 @@ function App() {
       <Routes>
         <Route exact path ='/' element={<Home/>}/>
         <Route exact path='/dogs' element={<Perros/>}/>
-        <Route exact path='/raza/:id' element={<Raza/>}/>
+        <Route exact path='/raza/:id' element={<Raza razas={razas}/>}/>
         <Route exact path='/crear' element={<Crear/>}/>
         <Route path="*" element={<Error404/>}/>
       </Routes>
