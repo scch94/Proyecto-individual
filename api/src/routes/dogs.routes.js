@@ -13,6 +13,7 @@ router.get('/', async (req,res,next)=>{
                 let separando = d.temperament.split(",");
                 separando = separando.map((s) => s.trim());
                 enviar.push({
+                    id: d.id,
                     name: d.name,
                     temperament: separando,
                     weight: d.weight.metric,
@@ -56,6 +57,7 @@ router.get("/", async (req, res) => {
                     separando = separando.map((s) => s.trim());
                 }
                 return {
+                    id:r.id,
                     name: r.name,
                     temperament: separando,
                     weight: r.weight.metric,
@@ -117,8 +119,16 @@ router.get('/:idRaza', (req,res)=>{
         .then((response) => (response = response.data))
         .then((razas)=>{
             console.log(razas)
-            res.send(razas)
+            res.send({
+                id:razas.id,
+                name: razas.name,
+                temperament: razas.temperament,
+                weight: razas.weight.metric,
+                height: razas.height.metric,
+                life_span: razas.life_span
+            })
         })
+        .catch((e)=>res.status(404).send(e))
     // try{
     //     let rasa=await Raza.findByPk(idRaza,{include:Temperamento})
     //     res.send(
@@ -138,12 +148,29 @@ router.get('/:idRaza', (req,res)=>{
 //crear un perro
 
 router.post("/", async (req, res) => {
-    let { name, height, weight, life_span, id, img } = req.body;
+    let { name, height, weight, life_span, id, img , temperament} = req.body;
+    let separando
     try {
+        console.log(1)
         if (!name || !height || !weight) {
         res.status(404).send("datos incompletos");
         } else {
         let nuevo = await Raza.create({ name, height, weight, life_span, id ,img});
+        if (temperament) {
+            console.log(temperament)
+            separando = temperament.split(",");
+            separando = separando.map((s) => s.trim());
+            console.log(separando)
+            separando.map(async (t) => {
+                let [a,created] = await Temperamento.findOrCreate({
+                    where: { name: t },
+                    defaults:{
+                        name:t
+                    }
+                });
+                nuevo.addTemperamentos(a);
+            });
+        }
         res.send(nuevo);
         }
     } catch (e) {
