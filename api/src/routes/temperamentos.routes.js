@@ -4,11 +4,29 @@ const { Raza, Temperamento,Op } = require("../db");
 
 
 const router = Router();
-
-router.get('/', async (req,res)=>{
+router.get('/',async(req,res)=>{
+    let temperamento=[]
+    let temperamentos=await Temperamento.findAll();
+    if(temperamentos.length>0)return res.status(200).send(temperamentos)
     try{
-        let temperamentos= await Temperamento.findAll()
-        res.send(temperamentos)
+        axios.get("https://api.thedogapi.com/v1/breeds")
+        .then((response) => (response = response.data))
+        .then((razas) => {
+            razas.map((r) => {
+                let separando;
+                if (r.temperament) {
+                    separando = r.temperament.split(",");
+                    separando = separando.map((s) => s.trim());
+                    temperamento = [...temperamento, ...separando];
+                    const set = new Set(temperamento);
+                    temperamento = [...set];
+                }
+            })
+            temperamento.map(async (t) => await Temperamento.create({ name: t }));
+            return razas
+            })
+        .then((razas)=>res.send(temperamento))
+        
     }catch(e){
         res.status(400).send(e)
     }

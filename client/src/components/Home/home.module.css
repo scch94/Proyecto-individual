@@ -1,0 +1,16 @@
+.inicio{
+    background-image: url(http://www.mascotahogar.com/Imagenes/wallpaper-de-perro-terrier.jpg);
+    height: 100vh;
+}
+.inicio__container{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+}
+
+.inicio__button{
+    background-color: bisque;
+    border-radius: 10%;
+    width: 20%;
+    height: 10%;
+}
