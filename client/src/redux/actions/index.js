@@ -13,3 +13,11 @@ export const getTemperaments=()=>dispatch=>{
         .then(temperamentos=>dispatch({type:'GET_TEMPERAMENTS',payload:temperamentos}))
     )
 }
+
+export const getDogsById=(id)=>dispatch=>{
+    return(
+        fetch(`http://localhost:3001/dogs/${id}`)
+        .then(response=>response.json())
+        .then(perro=>dispatch({type:'GET_BY_ID',payload:perro}))
+    )
+}

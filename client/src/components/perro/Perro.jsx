@@ -1,5 +1,6 @@
 import React from 'react'
 import s from './perro.module.css'
+import { Link } from "react-router-dom";
 
 export const Perro = ({id,image,weight,name,temperament}) => {
   return (
@@ -8,9 +9,9 @@ export const Perro = ({id,image,weight,name,temperament}) => {
         <img className={s.imagen} src={image} alt={name}/>
         <div className={s.card_info}>
             <h3>{name}</h3>
-            <p className={s.descripcion}>{temperament}</p>
-            <p className={s.unidades}>{weight}</p>
-            <button className={s.button}>mas info</button>
+            <span className={s.descripcion}>{temperament}</span>
+            <span className={s.unidades}>{weight}</span>
+            <Link to={`/raza/${id}`}><button className={s.button}>mas info</button></Link>
         </div>
     </article>
     </>

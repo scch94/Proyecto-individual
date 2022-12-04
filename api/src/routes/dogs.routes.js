@@ -10,12 +10,12 @@ router.get('/', async (req,res,next)=>{
     if(buscar){
         dogs.map(d=>{
             if(d.name.includes(buscar)){
-                let separando = d.temperament.split(",");
-                separando = separando.map((s) => s.trim());
+                // let separando = d.temperament.split(",");
+                // separando = separando.map((s) => s.trim());
                 enviar.push({
                     id: d.id,
                     name: d.name,
-                    temperament: separando,
+                    temperament: d.temperament,
                     weight: d.weight.metric,
                     image: d.image.url
                 })
@@ -51,15 +51,15 @@ router.get("/", async (req, res) => {
         .then((razas)=>{
             dogs=razas
             let all=razas.map((r)=>{
-                let separando;
-                if(r.temperament){
-                    separando = r.temperament.split(",");
-                    separando = separando.map((s) => s.trim());
-                }
+                // let separando;
+                // if(r.temperament){
+                //     separando = r.temperament.split(",");
+                //     separando = separando.map((s) => s.trim());
+                // }
                 return {
                     id:r.id,
                     name: r.name,
-                    temperament: separando,
+                    temperament: r.temperament,
                     weight: r.weight.metric,
                     image: r.image.url,
                 };

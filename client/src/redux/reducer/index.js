@@ -1,6 +1,7 @@
 const initialstate={
     dogs:[],
-    temperaments:[]
+    temperaments:[],
+    dog:{},
 }
 
 const rootReducer= (state=initialstate,action)=>{
@@ -15,6 +16,11 @@ const rootReducer= (state=initialstate,action)=>{
                 ...state,
                 temperaments:action.payload
             };
+        case 'GET_BY_ID':
+            return{
+                ...state,
+                dog:action.payload
+            }
         default:return{...state}
     } 
 }
