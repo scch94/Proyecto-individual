@@ -7,7 +7,10 @@ const router = Router();
 router.get('/',async(req,res)=>{
     let temperamento=[]
     let temperamentos=await Temperamento.findAll();
-    if(temperamentos.length>0)return res.status(200).send(temperamentos)
+    if(temperamentos.length>0){
+        let enviar=temperamentos.map(t=>t.name)
+        return res.status(200).send(enviar)
+    }
     try{
         axios.get("https://api.thedogapi.com/v1/breeds")
         .then((response) => (response = response.data))

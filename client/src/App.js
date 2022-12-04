@@ -10,6 +10,7 @@ function App() {
   useEffect(()=>{
     console.log("si entro")
     dispatch(actions.getDogs())
+    dispatch(actions.getTemperaments())
   },[dispatch])
   return (
     <>

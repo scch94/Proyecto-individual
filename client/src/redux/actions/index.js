@@ -5,3 +5,11 @@ export const getDogs =()=>dispatch=>{
         .then(perros=>dispatch({type:'GET_PERROS',payload:perros}))
     )
 }
+
+export const getTemperaments=()=>dispatch=>{
+    return(
+        fetch('http://localhost:3001/temperaments')
+        .then(response=>response.json())
+        .then(temperamentos=>dispatch({type:'GET_TEMPERAMENTS',payload:temperamentos}))
+    )
+}
