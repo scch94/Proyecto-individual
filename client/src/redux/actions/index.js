@@ -20,3 +20,9 @@ export const putImg=(img)=>{
         payload:img
     })
 }
+export const postRaza=(raza)=>{
+    return ({
+        type:'POST_RAZA',
+        payload:raza
+    })
+}

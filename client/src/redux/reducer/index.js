@@ -21,6 +21,11 @@ const rootReducer= (state=initialstate,action)=>{
                 ...state,
                 dog:action.payload
             }
+        case 'POST_RAZA':
+            return{
+                ...state,
+                dogs:[...state.dogs,action.payload]
+            }
         default:return{...state}
     } 
 }

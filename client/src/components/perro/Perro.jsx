@@ -6,9 +6,9 @@ import * as actions from '../../redux/actions/index'
 
 export const Perro = ({id,image,weight,name,temperament}) => {
   let dispatch=useDispatch()
+  console.log(temperament)
   function imagen(){
     dispatch(actions.putImg(image))
-    console.log("si entre")
   }
   return (
     <>
