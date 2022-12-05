@@ -5,7 +5,9 @@ import s from './crear.module.css'
 import { Perro } from '../perro/Perro'
 import * as actions from '../../redux/actions/index'
 
+
 export const Crear = () => {
+
     let [temp,setTemp]=useState([])
     let [imagen,setImagen]=useState("")
     let [activar,setActivar]=useState(false)
@@ -13,6 +15,7 @@ export const Crear = () => {
     let [input,setInput]=useState({name:"", heightMin:0,heightMax:0, weightMin:0,weightMax:0, life_span:"", temperament:""})
     let [error,setError]=useState({name:"", heightMin:"", weightMin:"", life_span:"", temperament:""})
     let temperamentos=useSelector(state=>state.temperaments)
+    let id=useSelector(state=>state.max)
     let dispatch=useDispatch();
     function handleChange(e){
         e.preventDefault();
@@ -52,11 +55,13 @@ export const Crear = () => {
             }
         }
     };
+    //permite agregar temperamentos del form
     function agregarTemperamentos(e){
         e.preventDefault();
         let f=[input.temperament]
         setTemperament((prev)=>[...prev,...f])
     }
+    //crea una nueva raza
     function crear(e){
         e.preventDefault()
         let temperamento
@@ -70,7 +75,7 @@ export const Crear = () => {
             height:`entre ${input.heightMin} y ${input.heightMax}`,
             weight:`entre ${input.weightMin} y ${input.weightMax}`,
             life_span:input.life_span,
-            id:300,
+            id:id,
             img:imagen, 
             temperament:temperamento
         }
@@ -85,8 +90,10 @@ export const Crear = () => {
         }).then(res=>res.json())
         .catch(error=>console.error(error))
         .then(response=>console.log(response))
-        dispatch(actions.postRaza({id:300,name:input.name,temperament:temperamento,weight:`entre ${input.weightMin} y ${input.weightMax}`,image:imagen}))
+        dispatch(actions.postRaza({id:id,name:input.name,temperament:temperamento,weight:`entre ${input.weightMin} y ${input.weightMax}`,image:imagen}))
+        dispatch(actions.aumentarMax())
     }
+    //abilita la pantalla de previsualisacion de la card
     function observar(e){
         let temperamento
         temperamento=temperament
@@ -101,7 +108,7 @@ export const Crear = () => {
         <>  
             <div className={s.contenedor}>
                 {
-                    activar===true?<Perro key={300} id={300} image={imagen} name={input.name} temperament={temp} weight={`entre ${input.weightMin} y ${input.weightMax}`}/>:null
+                    activar===true?<Perro key={id} id={id} image={imagen} name={input.name} temperament={temp} weight={`entre ${input.weightMin} y ${input.weightMax}`}/>:null
                 }   
                 <div className={s.contenedor_formulario}>
                     <form>

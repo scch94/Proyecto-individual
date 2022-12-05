@@ -26,3 +26,8 @@ export const postRaza=(raza)=>{
         payload:raza
     })
 }
+export const aumentarMax=()=>{
+    return({
+        type:'AUMENTAR_MAX'
+    })
+}
