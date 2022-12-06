@@ -56,11 +56,28 @@ router.get("/", async (req, res) => {
                 //     separando = r.temperament.split(",");
                 //     separando = separando.map((s) => s.trim());
                 // }
+                // let peso=r.weight.metric.split("-")
+                // peso=peso[1]+peso[0])
+                // peso=peso.toString()
+                let peso
+                if(r.weight.metric.split(" - ").length<2){
+                    peso=r.weight.metric
+                }else{
+                    peso=r.weight.metric.split(" - ")
+                    if(peso.includes("NaN")){
+                        peso=peso.join("")
+                        peso=peso.split("NaN")
+                        peso=peso.join(" ")
+                    }else if(!peso.includes("NaN")){
+                        peso=((parseInt(peso[0])+parseInt(peso[1]))/2)
+                        if(r.name==="Labrador Retriever") peso="30"
+                    }
+                }
                 return {
                     id:r.id,
                     name: r.name,
                     temperament: r.temperament,
-                    weight: r.weight.metric,
+                    weight: peso,
                     image: r.image.url,
                 };
             })
