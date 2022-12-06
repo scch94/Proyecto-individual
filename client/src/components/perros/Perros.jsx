@@ -14,7 +14,7 @@ export const Perros = () => {
     const [rasase,setRasase]=useState([...rasas].splice(0,8))
     const [paginaActual,setPaginaActual]=useState(0);
     //ordenar
-    let [ordenamiento,setordenamiento]=useState("")
+    let [ordenamiento,setordenamiento]=useState("Alfabetico [A-Z]")
     function ordenar(){
         console.log(ordenamiento)
         let orden
@@ -52,6 +52,7 @@ export const Perros = () => {
         }
         //setiamos la pagina actual a 0 para que inicie de nuevo el paginado 
         setPaginaActual(0)
+        console.log(orden)
         setRasase([...orden].splice(0,8))   
     }
     //funcion para ir a la siguiente pagina 
@@ -61,10 +62,11 @@ export const Perros = () => {
         const paginaFinal=Math.floor(items.length/8)
         const nextPage=paginaActual+1
         const primerindice=nextPage*8
-        //esto nos permitira 
-        // if(items.length%8===0){
-        //     if(nextPage===paginaFinal)return
-        // }
+        //esto nos permitira que si son 8 en la ultima pagina no pase a la siguiente
+        if(items.length%8===0&&paginaActual+1===paginaFinal){
+            console.log(paginaActual)
+            if(nextPage===paginaFinal)return
+        }
         if(nextPage===paginaFinal+1){
             return
         };

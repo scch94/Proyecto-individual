@@ -7,7 +7,7 @@ import * as actions from '../../redux/actions/index'
 
 
 export const Crear = () => {
-
+    let [creadorT,setCreadorT]=useState(0)
     let [temp,setTemp]=useState([])
     let [imagen,setImagen]=useState("")
     let [activar,setActivar]=useState(false)
@@ -57,9 +57,16 @@ export const Crear = () => {
     };
     //permite agregar temperamentos del form
     function agregarTemperamentos(e){
+        console.log(creadorT)
         e.preventDefault();
-        let f=[input.temperament]
+        let f
+        if(creadorT===0)f=input.temperament
+        if(creadorT>0)f=(" ".concat(input.temperament))
+        console.log(f)
+        f=[f]
         setTemperament((prev)=>[...prev,...f])
+        setCreadorT(prev=>prev+1)
+        
     }
     //crea una nueva raza
     function crear(e){
@@ -70,10 +77,11 @@ export const Crear = () => {
         temperamento = [...set];
         temperamento=temperamento.toString()
         setTemp(temperamento)
+        let weight=((input.heightMax+input.heightMin)/2)
         let datos={
             name:input.name,
             height:`entre ${input.heightMin} y ${input.heightMax}`,
-            weight:`entre ${input.weightMin} y ${input.weightMax}`,
+            weight:weight,
             life_span:input.life_span,
             id:id,
             img:imagen, 
@@ -90,7 +98,7 @@ export const Crear = () => {
         }).then(res=>res.json())
         .catch(error=>console.error(error))
         .then(response=>console.log(response))
-        dispatch(actions.postRaza({id:id,name:input.name,temperament:temperamento,weight:`entre ${input.weightMin} y ${input.weightMax}`,image:imagen}))
+        dispatch(actions.postRaza({id:id,name:input.name,temperament:temperamento,weight:weight,image:imagen}))
         dispatch(actions.aumentarMax())
     }
     //abilita la pantalla de previsualisacion de la card

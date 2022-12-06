@@ -3,6 +3,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { Crear } from './components/crear/Crear';
 import { Error404 } from './components/error/Error404';
+import { Footer } from './components/footer/Footer';
 import { Home } from './components/Home/Home';
 import { Navbar } from './components/navbar/Navbar';
 import { Perros } from './components/perros/Perros';
@@ -20,7 +21,7 @@ function App() {
     <>
       <Navbar/>
       <Routes>
-        <Route exact path ='/' element={<Home/>}/>
+        <Route exact path ='/' element={[<Home/>,<Footer/>]}/>
         <Route exact path='/dogs' element={<Perros/>}/>
         <Route exact path='/raza/:id' element={<Raza razas={razas}/>}/>
         <Route exact path='/crear' element={<Crear/>}/>

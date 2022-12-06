@@ -1,0 +1,76 @@
+.piePagina{
+    width: 100%;
+    height: 80%;
+    background-color: #0A141D;
+}
+.piePagina .grupo1{
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 50px;
+    padding: 0px 0px 10px;
+}
+
+.piePagina .grupo1 .box figure{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.piePagina .grupo1 .box figure img{
+    width: 80px;
+}
+
+.piePagina .grupo1 .box h2{
+    color: rgb(255, 255, 255);
+    margin-bottom: 25px;
+    font-size: 20px;
+}
+.piePagina .grupo1 .box p{
+    color: #efefef;
+    margin-bottom: 10px;
+}
+
+.piePagina .grupo1 .redsocial a{
+    display: inline-block;
+    text-decoration: none;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    color:#fff;
+    margin-right: 10px;
+    background-color: #0d2033;
+    text-align: center;
+    transition: all 3000ms ease;
+    border-radius: 50%;
+}
+
+.piePagina .grupo1 .redsocial a:hover{
+    color: rgb(0, 255, 242);
+}
+
+.piePagina .grupo2{
+    background-color: #0a1a2a;
+    padding:  15px 10px;
+    text-align: center;
+    color: #fff
+
+}
+
+.piePagina .grupo2 small{
+    font-size: 15px;
+}
+
+@media screen and(max-width:800px){
+    .piePagina .grupo1{
+        width: 90%;
+        grid-template-columns: repeat(1,1fr);
+        grid-gap: 30px;
+        padding: 35px 0px;
+        
+    }
+}
