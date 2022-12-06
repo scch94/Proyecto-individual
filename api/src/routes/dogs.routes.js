@@ -80,7 +80,7 @@ router.get("/", async (req, res) => {
         //             name: r.name,
         //             temperament: separando,
         //             weight: r.weight.metric,
-        //             image: r.image.url,
+        //             image: r.image.url;
         //         };
         //     });
         // temperamento.map(async (t) => await Temperamento.create({ name: t }));
