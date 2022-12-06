@@ -5,14 +5,22 @@ import { Perro } from '../perro/Perro'
 import s from './perros.module.css'
 
 export const Perros = () => {
+    //buscador
+    let [buscar,setBuscar]=useState("")
+    //paginacion
     let rasas=useSelector(state=>state.dogs)
-    let [rasase,setRasase]=useState([...rasas])
+    const [items,setItems]=useState([...rasas])
+    const [rasase,setRasase]=useState([...rasas].splice(0,8))
+    const [paginaActual,setPaginaActual]=useState(0);
+    //ordenar
     let [ordenamiento,setordenamiento]=useState("")
     function ordenar(){
         console.log(ordenamiento)
         let orden
+        //dependiendo de que variable este en ordenamiento se activara algun orden 
+        //utilizamos el metodo sort para ordenar los objetos
         if(ordenamiento==="Alfabetico [A-Z]"){
-            orden=rasas.sort((a,b)=>{
+            orden=items.sort((a,b)=>{
                 if(a.name<b.name)return -1
                 if(a.name>b.name)return 1
                 return 0
@@ -20,7 +28,7 @@ export const Perros = () => {
             
         }
         if(ordenamiento==="Alfabetico [Z-A]"){
-            orden=rasas.sort((a,b)=>{
+            orden=items.sort((a,b)=>{
                 if(a.name>b.name)return -1
                 if(a.name<b.name)return 1
                 return 0
@@ -28,37 +36,76 @@ export const Perros = () => {
         }
         if(ordenamiento==="Peso [menor-mayor]"){
 
-            orden=rasas.sort((a,b)=>{
+            orden=items.sort((a,b)=>{
                 if(a.weight<b.weight)return -1
                 if(a.weight>b.weight)return 1
                 return 0
             })
         }
         if(ordenamiento==="Peso [mayor-menor]"){
-            console.log("entre")
-            orden=rasas.sort((a,b)=>{
+            orden=items.sort((a,b)=>{
                 if(a.weight>b.weight)return -1
                 if(a.weight<b.weight)return 1
                 return 0
             })
         }
-        setRasase([...orden])
-        
+        //setiamos la pagina actual a 0 para que inicie de nuevo el paginado 
+        setPaginaActual(0)
+        setRasase([...orden].splice(0,8))   
+    }
+    //funcion para ir a la siguiente pagina 
+    function nextPage(){
+        //pagina final nos permitira identificar cual es la ultima pagina que 
+        //tiene 8 elemetnos completos
+        const paginaFinal=Math.floor(items.length/8)
+        const nextPage=paginaActual+1
+        const primerindice=nextPage*8
+        //esto nos permitira 
+        if(items.length%8===0){
+            if(nextPage===paginaFinal)return
+        }
+        if(nextPage===paginaFinal+1){
+            return
+        };
+        setRasase([...items].splice(primerindice,8))
+        setPaginaActual(nextPage)
+    }
+    function prevPage(){
+        const prevPage=paginaActual-1
+        const primerindice=prevPage*8
+        if(prevPage===-1)return
+        setRasase([...items].splice(primerindice,8))
+        setPaginaActual(prevPage)
+    }
+    function handleChange(e){
+        setBuscar(e.target.value)
+        console.log(e.target.value)
+        let buscador=rasas.filter(a=>{
+            let comp=a.name.toLowerCase()
+            return comp.includes(e.target.value)
+        })
+        setPaginaActual(0)
+        setRasase([...buscador].splice(0,8))
+        setItems([...buscador])
     }
     return (
         <>
             <div>
+                pagina actual ={paginaActual+1}
                 <div>
                     <button onClick={ordenar}>ORDEN</button>
                     <select name="ordenamiento" value={ordenamiento} onChange={(e)=>setordenamiento(e.target.value)}>
-                        <option value="----" key={0}>----</option>
-                        <option value="Alfabetico [A-Z]" key={1}>Alfabetico [A-Z]</option>
                         <option value="Alfabetico [Z-A]" key={2}>Alfabetico [Z-A]</option>
+                        <option value="Alfabetico [A-Z]" key={1}>Alfabetico [A-Z]</option>
                         <option value="Peso [menor-mayor]" key={3}>Peso [menor-mayor]</option>
                         <option value="Peso [mayor-menor]" key={4}>Peso [mayor-menor]</option>
-                        
                     </select>
-                    
+                    {" "}
+                    <button onClick={prevPage}>ANTERIOR</button>
+                    <button onClick={nextPage}>SIGUIENTE</button>
+                    {" "}
+                    <button>buscar</button>
+                    <input type="text" name='buscar' value={buscar} onChange={(e)=>handleChange(e)}/>
                 </div>
                 <div className={s.contenedor}>
                     <h1>razas</h1>
