@@ -7,6 +7,7 @@ import s from './perros.module.css'
 export const Perros = () => {
     //buscador
     let [buscar,setBuscar]=useState("")
+    let [busquedaPor,setBusquedaPor]=useState("elige")
     //paginacion
     let rasas=useSelector(state=>state.dogs)
     const [items,setItems]=useState([...rasas])
@@ -61,9 +62,9 @@ export const Perros = () => {
         const nextPage=paginaActual+1
         const primerindice=nextPage*8
         //esto nos permitira 
-        if(items.length%8===0){
-            if(nextPage===paginaFinal)return
-        }
+        // if(items.length%8===0){
+        //     if(nextPage===paginaFinal)return
+        // }
         if(nextPage===paginaFinal+1){
             return
         };
@@ -78,10 +79,15 @@ export const Perros = () => {
         setPaginaActual(prevPage)
     }
     function handleChange(e){
+        if(busquedaPor==="elige")return
         setBuscar(e.target.value)
         console.log(e.target.value)
+        console.log(busquedaPor)
         let buscador=rasas.filter(a=>{
-            let comp=a.name.toLowerCase()
+            if(!a[busquedaPor]){
+                return false
+            }
+            let comp=a[busquedaPor].toLowerCase()
             return comp.includes(e.target.value)
         })
         setPaginaActual(0)
@@ -104,8 +110,16 @@ export const Perros = () => {
                     <button onClick={prevPage}>ANTERIOR</button>
                     <button onClick={nextPage}>SIGUIENTE</button>
                     {" "}
-                    <button>buscar</button>
-                    <input type="text" name='buscar' value={buscar} onChange={(e)=>handleChange(e)}/>
+                    {
+                        busquedaPor==="elige"?null:(<input type="text" name='buscar' value={buscar} onChange={(e)=>handleChange(e)} placeholder="buscar por"/>)
+                    }
+                    
+                    <select name="busquedaPor" value={busquedaPor} onChange={(e)=>setBusquedaPor(e.target.value)}>
+                        <option value="elige" key={7}>elige por que quieres ordenar</option>
+                        <option value="name" key={5}>nombre</option>
+                        <option value="temperament" key={6}>temperamento</option>
+                    </select>
+                    
                 </div>
                 <div className={s.contenedor}>
                     <h1>razas</h1>
