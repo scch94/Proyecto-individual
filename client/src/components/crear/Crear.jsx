@@ -13,7 +13,7 @@ export const Crear = () => {
     let [imagen,setImagen]=useState("")
     let [activar,setActivar]=useState(false)
     let [temperament,setTemperament]=useState([])
-    let [input,setInput]=useState({name:"", heightMin:0,heightMax:0, weightMin:0,weightMax:0, life_span:"", temperament:""})
+    let [input,setInput]=useState({name:" ", heightMin:1,heightMax:0, weightMin:1,weightMax:0, life_span:0, temperament:""})
     let [error,setError]=useState({name:"", heightMin:"", weightMin:"", life_span:"", temperament:""})
     let temperamentos=useSelector(state=>state.temperaments)
     let id=useSelector(state=>state.max)
@@ -114,13 +114,15 @@ export const Crear = () => {
         setActivar(true)
     }
     return (
-        <>  
+        <div className={s.pocicion}>  
             <div className={s.contenedor}>
-                {
-                    // activar===true?<Perro key={id} id={id} image={imagen} name={input.name} temperament={temp} weight={`entre ${input.weightMin} y ${input.weightMax}`}/>:null
-                    activar===true?<Probando key={id} id={id} image={imagen} name={input.name} temperament={temp} weight={`entre ${input.weightMin} y ${input.weightMax}`}/>:null
+                <div className={s.contenedor_tarjeta}>
+                    {
+                        // activar===true?<Perro key={id} id={id} image={imagen} name={input.name} temperament={temp} weight={`entre ${input.weightMin} y ${input.weightMax}`}/>:null
+                        activar===true?<Probando key={id} id={id} image={imagen} name={input.name} temperament={temp} weight={`entre ${input.weightMin} y ${input.weightMax}`}/>:null
 
-                }   
+                    }   
+                </div>
                 {" "}
                 <div className={s.contenedor_formulario}>
                     <form>
@@ -194,6 +196,6 @@ export const Crear = () => {
                 </div>
             </div>
             
-        </>
+        </div>
     )
 }

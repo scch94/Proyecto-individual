@@ -72,8 +72,8 @@
 .flipcard {
     
     background-color: transparent;
-    width: 290px;
-    height: 400px;
+    width: 260px;
+    height: 320px;
     perspective: 1000px;
     font-family: sans-serif;
     margin: 20px;
@@ -128,17 +128,18 @@
     transform: rotateY(180deg);    
   }
   .imagen{
-    width: 290px;
-    height: 4000px;
+    width: 260px;
+    height: 320px;
     border-radius: 1rem;
     
 }
 
 .flipcardback img{
-  height: 130px;
-  width: 130px;
+  height: 90px;
+  width: 90px;
   border-radius: 50%;
   margin-left:  85px;
+  margin-top: 2px;
   /* position: absolute;
   margin-left:  85px;
   margin-bottom: 240px; */

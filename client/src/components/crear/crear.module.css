@@ -1,6 +1,29 @@
+.pocicion{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .contenedor{
+    width: 900px;
+    height: 65vh;
     display: flex;
     justify-content: center;
     flex-direction: row;
-    margin: 20px;
+    background-color: rgb(213, 202, 223);
+}
+.contenedor_tarjeta{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.contenedor_formulario{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(238, 234, 241);
 }

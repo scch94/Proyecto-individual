@@ -143,7 +143,7 @@ export const Perros = () => {
                                 <span><i onClick={nextPage} className="fa fa-chevron-right"></i></span>
                             </li>
                         </ul>
-                        <div className={s.ventas}>
+                        <div className={s.razas}>
                             {
                                 rasase.map(r=><Perro key={r.id} id={r.id} image={r.image} name={r.name} temperament={r.temperament} weight={r.weight}/>)
                                 // ventas.map((v,i)=><Venta venta={v} index={i}/>)

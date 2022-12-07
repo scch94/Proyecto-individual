@@ -29,10 +29,10 @@ export const Perro = ({id,image,weight,name,temperament}) => {
             </div>
             <div className={s.flipcardback}>
                 <img src={image} alt={name} />
-                <h2>{name}</h2>
-                <h3>Temperamento</h3>
+                <h3>{name}</h3>
+                <p>TEMPERAMENTOS</p>
                 <span>{temperament}</span>
-                <h3>{weight}</h3>
+                <h3>Peso promedio:{weight}</h3>
             </div>
         </div>
     </div>
