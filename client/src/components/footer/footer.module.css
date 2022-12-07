@@ -65,12 +65,16 @@
     font-size: 15px;
 }
 
-@media screen and(max-width:800px){
+@media screen and (max-width:800px){
+
     .piePagina .grupo1{
         width: 90%;
-        grid-template-columns: repeat(1,1fr);
-        grid-gap: 30px;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap:30px;
         padding: 35px 0px;
-        
+        text-align: center;
+    }
+    .img{
+        margin-right: 100px;
     }
 }

@@ -8,7 +8,7 @@ export const Footer = () => {
                 <div className={s.grupo1}>
                     <div className={s.box}>
                         <figure>
-                            <img src={ñ} alt="logo" />
+                            <img className={s.img} src={ñ} alt="logo" />
                             
                         </figure>
                     </div>
@@ -20,9 +20,9 @@ export const Footer = () => {
                     <div className={s.box}>
                         <h2>SIGUENOS</h2>
                         <div className={s.redsocial}>
-                            <a href="https://www.linkedin.com/in/scch94/" className='fa fa-linkedin'></a>
+                            <a href="https://www.linkedin.com/in/scch94/" className='fa fa-linkedin'>{" "}</a>
                             {" "}
-                            <a href="https://github.com/scch94" className='fa fa-github'></a>
+                            <a href="https://github.com/scch94" className='fa fa-github'>{" "}</a>
                         </div>
                     </div>
                 </div>

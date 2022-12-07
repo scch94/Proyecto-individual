@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Perro } from '../perro/Perro'
 import s from './perros.module.css'
+import img from '../../images/fondopagina.png'
 
 export const Perros = () => {
     //buscador

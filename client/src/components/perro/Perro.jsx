@@ -12,7 +12,7 @@ export const Perro = ({id,image,weight,name,temperament}) => {
   }
   return (
     <>
-    <article className={s.card}>
+    {/* <article className={s.card}>
         <img className={s.imagen} src={image} alt={name}/>
         <div className={s.card_info}>
             <h3>{name}</h3>
@@ -20,7 +20,23 @@ export const Perro = ({id,image,weight,name,temperament}) => {
             <span className={s.unidades}>{weight}</span>
             <Link to={`/raza/${id}`}><button onClick={imagen} className={s.button}>mas info</button></Link>
         </div>
-    </article>
+    </article> */}
+    <Link to={`/raza/${id}`} onClick={imagen}>
+    <div className={s.flipcard}>
+        <div className={s.flipcardinner}>
+            <div className={s.flipcardfront}>
+            <img className={s.imagen} src={image} alt={name}/>
+            </div>
+            <div className={s.flipcardback}>
+                <img src={image} alt={name} />
+                <h2>{name}</h2>
+                <h3>Temperamento</h3>
+                <span>{temperament}</span>
+                <h3>{weight}</h3>
+            </div>
+        </div>
+    </div>
+    </Link>
     </>
   )
 }

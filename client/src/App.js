@@ -10,6 +10,7 @@ import { Perros } from './components/perros/Perros';
 import { Raza } from './components/raza/Raza';
 import * as actions from './redux/actions/index'
 
+
 function App() {
   let dispatch=useDispatch();
   let razas=useSelector(state=>state.dogs)
@@ -19,10 +20,9 @@ function App() {
   },[dispatch])
   return (
     <>
-      <Navbar/>
       <Routes>
-        <Route exact path ='/' element={[<Home/>,<Footer/>]}/>
-        <Route exact path='/dogs' element={<Perros/>}/>
+        <Route exact path ='/' element={[<Home/>]}/>
+        <Route exact path='/dogs' element={[<Navbar/>,<Perros/>,<Footer/>]}/>
         <Route exact path='/raza/:id' element={<Raza razas={razas}/>}/>
         <Route exact path='/crear' element={<Crear/>}/>
         <Route path="*" element={<Error404/>}/>

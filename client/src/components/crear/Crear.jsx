@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import s from './crear.module.css'
 import { Perro } from '../perro/Perro'
 import * as actions from '../../redux/actions/index'
+import { Probando } from '../Probando/Probando'
 
 
 export const Crear = () => {
@@ -116,8 +117,11 @@ export const Crear = () => {
         <>  
             <div className={s.contenedor}>
                 {
-                    activar===true?<Perro key={id} id={id} image={imagen} name={input.name} temperament={temp} weight={`entre ${input.weightMin} y ${input.weightMax}`}/>:null
+                    // activar===true?<Perro key={id} id={id} image={imagen} name={input.name} temperament={temp} weight={`entre ${input.weightMin} y ${input.weightMax}`}/>:null
+                    activar===true?<Probando key={id} id={id} image={imagen} name={input.name} temperament={temp} weight={`entre ${input.weightMin} y ${input.weightMax}`}/>:null
+
                 }   
+                {" "}
                 <div className={s.contenedor_formulario}>
                     <form>
                         <div>

@@ -1,9 +1,10 @@
+
 .contenedor{
     text-align: center;
     color: white;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
 }
 .ventas{
     display: flex;
