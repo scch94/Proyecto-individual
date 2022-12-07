@@ -1,7 +1,7 @@
+
 .navbar{
-    width: 80%;
-    margin:auto;
-    padding: 35px 0;
+    width: 100%;
+    margin: 0px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -10,7 +10,8 @@
 }
 
 .logo{
-    width: 120px;
+    width: 60px;
+    margin:10px 100px
 }
 .navbar ul li{
     list-style: none;

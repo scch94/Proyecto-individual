@@ -1,9 +1,78 @@
 .contendor{
-    display: flex;
-    justify-content: center;
-    margin-top: 160px;
+    width: 100%;
+    height: 100vh;
+}
+.contendor img{
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
 
 }
-.contendor h1{
-    color: rgb(7, 6, 6);
+.content{
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.cta {
+    position: relative;
+    margin: auto;
+    padding: 12px 18px;
+    transition: all 0.2s ease;
+    border: none;
+    background: none;
+    margin-left: 200px;
+}
+   
+.cta:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 193PX;
+    display: block;
+    border-radius: 50px;
+    background: #b1dae7;
+    width: 45px;
+    height: 45px;
+    transition: all 0.3s ease;
+}
+
+.cta span {
+    position: relative;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #234567;
+}
+.cta svg {
+    position: relative;
+    top: 0;
+    margin-top: 200PX;
+
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: #234567;
+    stroke-width: 2;
+    transform: translateX(-5px);
+    transition: all 0.3s ease;
+}
+.cta:hover:before {
+    width: 100%;
+    background: #b1dae7;
+}
+.cta:hover svg {
+    transform: translateX(0);
+}
+
+.cta:active {
+    transform: scale(0.95);
 }

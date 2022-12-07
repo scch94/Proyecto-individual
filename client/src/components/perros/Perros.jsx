@@ -100,37 +100,55 @@ export const Perros = () => {
     return (
         <>
             <div>
-                pagina actual ={paginaActual+1}
-                <div>
-                    <button onClick={ordenar}>ORDEN</button>
-                    <select name="ordenamiento" value={ordenamiento} onChange={(e)=>setordenamiento(e.target.value)}>
-                        <option value="Alfabetico [Z-A]" key={2}>Alfabetico [Z-A]</option>
-                        <option value="Alfabetico [A-Z]" key={1}>Alfabetico [A-Z]</option>
-                        <option value="Peso [menor-mayor]" key={3}>Peso [menor-mayor]</option>
-                        <option value="Peso [mayor-menor]" key={4}>Peso [mayor-menor]</option>
-                    </select>
-                    {" "}
-                    <button onClick={prevPage}>ANTERIOR</button>
-                    <button onClick={nextPage}>SIGUIENTE</button>
-                    {" "}
-                    {
-                        busquedaPor==="elige"?null:(<input type="text" name='buscar' value={buscar} onChange={(e)=>handleChange(e)} placeholder="buscar por"/>)
-                    }
-                    
-                    <select name="busquedaPor" value={busquedaPor} onChange={(e)=>setBusquedaPor(e.target.value)}>
-                        <option value="elige" key={7}>elige por que quieres ordenar</option>
-                        <option value="name" key={5}>nombre</option>
-                        <option value="temperament" key={6}>temperamento</option>
-                    </select>
-                    
-                </div>
-                <div className={s.contenedor}>
-                    <h1>razas</h1>
-                    <div className={s.ventas}>
+                <div className={s.todo}>
+                    pagina actual ={paginaActual+1}
+                    <div>
+                        <button onClick={ordenar}>ORDEN</button>
+                        <select name="ordenamiento" value={ordenamiento} onChange={(e)=>setordenamiento(e.target.value)}>
+                            <option value="Alfabetico [Z-A]" key={2}>Alfabetico [Z-A]</option>
+                            <option value="Alfabetico [A-Z]" key={1}>Alfabetico [A-Z]</option>
+                            <option value="Peso [menor-mayor]" key={3}>Peso [menor-mayor]</option>
+                            <option value="Peso [mayor-menor]" key={4}>Peso [mayor-menor]</option>
+                        </select>
+                        {" "}
+                        <button onClick={prevPage}>ANTERIOR</button>
+                        <button onClick={nextPage}>SIGUIENTE</button>
+                        {" "}
                         {
-                            rasase.map(r=><Perro key={r.id} id={r.id} image={r.image} name={r.name} temperament={r.temperament} weight={r.weight}/>)
-                            // ventas.map((v,i)=><Venta venta={v} index={i}/>)
+                            busquedaPor==="elige"?null:(<input type="text" name='buscar' value={buscar} onChange={(e)=>handleChange(e)} placeholder="buscar por"/>)
                         }
+                        
+                        <select name="busquedaPor" value={busquedaPor} onChange={(e)=>setBusquedaPor(e.target.value)}>
+                            <option value="elige" key={7}>elige por que quieres ordenar</option>
+                            <option value="name" key={5}>nombre</option>
+                            <option value="temperament" key={6}>temperamento</option>
+                        </select>
+                        
+                    </div>
+                    <div className={s.contenedor}>
+                        <div>
+
+                        </div>
+                        <ul className={s.wrapper}>
+                            <li className={s.icon}>
+                                <span className={s.tooltip}>prev</span>
+                                <span><i onClick={prevPage} className="fa fa-chevron-left">  </i></span>
+                            </li>
+                            <li className={s.icon}>
+                                <span className={s.tooltip}>current</span>
+                                <span><i>{paginaActual+1}</i></span>
+                            </li>
+                            <li className={s.icon}>
+                                <span className={s.tooltip}>next</span>
+                                <span><i onClick={nextPage} className="fa fa-chevron-right"></i></span>
+                            </li>
+                        </ul>
+                        <div className={s.ventas}>
+                            {
+                                rasase.map(r=><Perro key={r.id} id={r.id} image={r.image} name={r.name} temperament={r.temperament} weight={r.weight}/>)
+                                // ventas.map((v,i)=><Venta venta={v} index={i}/>)
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
