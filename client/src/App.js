@@ -23,7 +23,7 @@ function App() {
       <Routes>
         <Route exact path ='/' element={[<Home/>]}/>
         <Route exact path='/dogs' element={[<Navbar/>,<Perros/>,<Footer/>]}/>
-        <Route exact path='/raza/:id' element={<Raza razas={razas}/>}/>
+        <Route exact path='/raza/:id' element={[<Navbar/>,<Raza razas={razas}/>,<Footer/>]}/>
         <Route exact path='/crear' element={<Crear/>}/>
         <Route path="*" element={<Error404/>}/>
       </Routes>

@@ -1,0 +1,64 @@
+.pocicion{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+
+}
+.card{
+    margin-bottom: 90px;
+    width: 700px;
+    height: 500px;
+    background-color: rgb(238, 234, 241);
+    color: #939393;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info{
+    margin-top: 0px;
+    margin-bottom: 30px;
+    width: 600px;
+    height: 450px;
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+}
+
+.info img{
+
+    margin: 10px;
+    width: 280px;
+    height: 300px;
+    border-radius: 1rem;
+}
+.datos{
+    text-align: center;
+    margin-left: 60px;
+    
+}
+
+@media screen and (max-width:800px){
+    .card{
+        width: 350px;
+        height: 600px;
+    }
+    .info{
+        margin-top: 0px;
+        width: 600px;
+        height: 450px;
+        display: flex;
+        flex-direction:column;
+        align-items: center;
+    }
+    .datos{
+        text-align: center;
+        margin-right: 70px;
+    }
+    .temp{
+        visibility: collapse;
+    }
+}
