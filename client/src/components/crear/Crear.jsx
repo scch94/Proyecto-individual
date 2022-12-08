@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import s from './crear.module.css'
 import { Perro } from '../perro/Perro'
 import * as actions from '../../redux/actions/index'
-import { Probando } from '../Probando/Probando'
 
 
 export const Crear = () => {
@@ -13,7 +12,7 @@ export const Crear = () => {
     let [imagen,setImagen]=useState("")
     let [activar,setActivar]=useState(false)
     let [temperament,setTemperament]=useState([])
-    let [input,setInput]=useState({name:" ", heightMin:1,heightMax:0, weightMin:1,weightMax:0, life_span:0, temperament:""})
+    let [input,setInput]=useState({name:"", heightMin:"",heightMax:"", weightMin:"",weightMax:"", life_span:"", temperament:""})
     let [error,setError]=useState({name:"", heightMin:"", weightMin:"", life_span:"", temperament:""})
     let temperamentos=useSelector(state=>state.temperaments)
     let id=useSelector(state=>state.max)
@@ -118,52 +117,47 @@ export const Crear = () => {
             <div className={s.contenedor}>
                 <div className={s.contenedor_tarjeta}>
                     {
-                        // activar===true?<Perro key={id} id={id} image={imagen} name={input.name} temperament={temp} weight={`entre ${input.weightMin} y ${input.weightMax}`}/>:null
-                        activar===true?<Probando key={id} id={id} image={imagen} name={input.name} temperament={temp} weight={`entre ${input.weightMin} y ${input.weightMax}`}/>:null
-
+                        activar===true?<Perro key={id} id={id} image={imagen} name={input.name} temperament={temp} weight={`entre ${input.weightMin} y ${input.weightMax}`}/>:(
+                            <div>
+                                {
+                                    error.name===""?<br />:<p>{error.name}</p>
+                                }
+                                {
+                                    error.weightMin===""?(<br />):(<p>{error.weightMin}</p>)
+                                }
+                                {
+                                    error.heightMin===""?(<br />):(<p>{error.heightMin}</p>)
+                                }
+                                {
+                                    error.life_span===""?(<br />):(<p>{error.life_span}</p>)
+                                }
+                            </div>
+                            )
                     }   
                 </div>
                 {" "}
                 <div className={s.contenedor_formulario}>
-                    <form>
-                        <div>
-                            <label >Nombre</label>
-                            <br />
-                            <input type="text" name='name' value={input.name} onChange={(e)=>handleChange(e)}/>
+                    <h2>crear raza</h2>
+                        <div className={s.busca}>
+                            <input placeholder="Nombre"  type="text" name='name' value={input.name} onChange={(e)=>handleChange(e)}/>
                         </div>
-                        {
-                            error.name===""?<br />:<p>{error.name}</p>
-                        }
-                        <div>
-                            <label >Altura</label>
-                            <br />
-                            <label >min</label>
-                            <input type="number" name='heightMin' value={input.heightMin} onChange={(e)=>handleChange(e)}/>
-                            <label >max</label>
-                            <input type="number" name='heightMax' value={input.heightMax} onChange={(e)=>handleChange(e)}/>
+                        <br />
+                        <div className={s.busca}>
+                            <input placeholder="Altura min"  type="number" name='heightMin' value={input.heightMin} onChange={(e)=>handleChange(e)}/>
+                            {""}
+                            <input placeholder="Altura max" type="number" name='heightMax' value={input.heightMax} onChange={(e)=>handleChange(e)}/>
                         </div>
-                        {
-                            error.heightMin===""?(<br />):(<p>{error.heightMin}</p>)
-                        }
-                        <div>
-                            <label>Peso</label>
-                            <br />
-                            <label >min</label>
-                            <input type="number" name='weightMin' value={input.weightMin} onChange={(e)=>handleChange(e)}/>
-                            <label >max</label>
-                            <input type="number" name='weightMax' value={input.weightMax} onChange={(e)=>handleChange(e)}/>
+                        <br />
+                        <div className={s.busca}>
+                            <input placeholder='Peso min' type="number" name='weightMin' value={input.weightMin} onChange={(e)=>handleChange(e)}/>
+                            <input placeholder='Peso max' type="number" name='weightMax' value={input.weightMax} onChange={(e)=>handleChange(e)}/>
                         </div>
-                        {
-                            error.weightMin===""?(<br />):(<p>{error.weightMin}</p>)
-                        }
-                        <div>
-                            <label>Años de vida</label>
-                            <input type="number" name='life_span'value={input.life_span} onChange={(e)=>handleChange(e)}/>
+                        <br />
+                        <div className={s.busca}>
+                            <input  placeholder="Años promedio" type="number" name='life_span'value={input.life_span} onChange={(e)=>handleChange(e)}/>
                         </div>
-                        {
-                            error.life_span===""?(<br />):(<p>{error.life_span}</p>)
-                        }
-                        <div>
+                        <br />
+                        <div className={s.busca}>
                             <label >temperamento</label>
                             <select name="temperament" value={input.temperament} onChange={(e)=>handleChange(e)}>
                                 {
@@ -171,28 +165,26 @@ export const Crear = () => {
                                 }
                             </select>
                             {" "}
-                            <button onClick={(e)=>agregarTemperamentos(e)}>agregar temperamento</button>
+                            {/* <button onClick={(e)=>agregarTemperamentos(e)}>+</button> */}
                         </div>
                         <br />
-                        <div>
-                            <label htmlFor="">img</label>
-                            <input type="text" id="imagen"value={imagen} onChange={(e=>setImagen(e.target.value))} />
+                        <div className={s.busca}>
+                            <input placeholder="ruta de la imagen" type="text" id="imagen"value={imagen} onChange={(e=>setImagen(e.target.value))} />
                         </div>
                         <br />
-                        <div>
+                        <div className={s.busca}>
                             {
                                 JSON.stringify(error)===JSON.stringify({name:"", heightMin:"", weightMin:"", life_span:"", temperament:""})?(
                                 <>
                                 <button  onClick={(e)=>crear(e)}>enviar</button>
                                 {" "}
-                                <button onClick={(e)=>observar(e)}>pre-vizualisar</button>
+                                <button onClick={(e)=>observar(e)}>ver tarjeta</button>
                                 </>):(
                                 <p>para enviar el formulario corrige los errores</p>
                                 )
                             }
                             
                         </div>
-                    </form>
                 </div>
             </div>
             

@@ -5,25 +5,74 @@
     justify-content: center;
     align-items: center;
 }
-
+.contenedor_formulario h2{
+    color: #939393;
+}
 .contenedor{
     width: 900px;
     height: 65vh;
     display: flex;
     justify-content: center;
     flex-direction: row;
-    background-color: rgb(213, 202, 223);
+    /* background-color: rgb(213, 202, 223); */
 }
 .contenedor_tarjeta{
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+
 }
 .contenedor_formulario{
     width: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
     background-color: rgb(238, 234, 241);
+    border-radius: 10px;
+    flex-direction: column;
 }
+.busca{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+} 
+.busca input{
+    margin: 0px 15px;
+    border: none;
+    background-color: #fdfdfde3;
+    border-bottom: 1px solid rgb(213, 202, 223);
+    border-radius: 20px;
+    color: rgb(50, 22, 76);
+    outline: none;
+    padding: 9px;
+    width: 120px;
+    height: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 500;
+    font-size: medium;
+}
+.busca label,
+.busca p{
+    color: #939393;
+
+}
+.busca button{
+    border: none;
+  background-color: #fff;
+  color: #939393;
+  padding: 0px;
+  width: 80px;
+  height: 30px;
+  margin: -10px 15px;
+  border-radius: 10%;
+  cursor: pointer;
+  transition: .5s all;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: 400;
+  font-size:small;
+}
+.busca button:hover{
+    border: 2px solid rgb(213, 202, 223);
+    background-color: rgb(213, 202, 223);
+    color: #939393;
+}
+  

@@ -81,51 +81,30 @@ router.get("/", async (req, res) => {
                     image: r.image.url,
                 };
             })
-            res.send(all)
+
+            return all
         })
-        // .then(async (razas) => {
-        //     let bd = await razas.map((r) => {
-        //         let separando;
-        //         if (r.temperament) {
-        //             separando = r.temperament.split(",");
-        //             separando = separando.map((s) => s.trim());
-        //             temperamento = [...temperamento, ...separando];
-        //             const set = new Set(temperamento);
-        //             temperamento = [...set];
-        //         }
-        //         return {
-        //             name: r.name,
-        //             temperament: separando,
-        //             weight: r.weight.metric,
-        //             image: r.image.url;
-        //         };
-        //     });
-        // temperamento.map(async (t) => await Temperamento.create({ name: t }));
-        // razas.map(async (r) => {
-        //     let separando;
-        //     let rase = await Raza.create({
-        //         id: r.id,
-        //         name: r.name,
-        //         height: r.height.metric,
-        //         weight: r.weight.metric,
-        //         life_span: r.life_span,
-        //         image: r.image.url,
-        //     });
-        //     if (r.temperament) {
-        //         separando = r.temperament.split(",");
-        //         separando = separando.map((s) => s.trim());
-        //         separando.map(async (t) => {
-        //             let a = await Temperamento.findOne({
-        //                 where: { name: t },
-        //                 });
-        //             rase.addTemperamentos(a);
-        //         });
-        //     }
-        // });
-        // res.send(bd);
-        // return razas;
-        // })
-        .catch((e) => res.status(404).send("encontramos este error " + e));
+        .then( async (all)=>{
+            let bdd=await Raza.findAll({include:Temperamento})
+            if(bdd.length==0)return res.send(all)
+            let unir=bdd.map(r=>{
+                let temperamentos=r.Temperamentos.map(temp=>temp.name)
+                temperamentos=temperamentos.toString();
+                temperamentos= temperamentos.replaceAll(',',', ')
+                console.log(temperamentos)
+                return (
+                    {
+                        id:r.id,
+                        name: r.name,
+                        temperament: temperamentos,
+                        weight: r.weight,
+                        image: r.image
+                    }
+                )
+            })
+            res.send([...all,...unir])
+        })
+        .catch((e) => res.status(404).send(e));
 });
 
 router.get('/:idRaza', (req,res)=>{

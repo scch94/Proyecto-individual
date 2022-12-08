@@ -1,4 +1,16 @@
+.todo{
 
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.buscador{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100px;
+}
 .contenedor{
     text-align: center;
     color: white;
@@ -17,9 +29,6 @@
     margin: 20px;
 }
 
-.todo{
-    
-}
 .wrapper {
     display: inline-flex;
     list-style: none;
@@ -33,7 +42,7 @@
   .wrapper .icon {
     position: relative;
     background: rgb(213, 202, 223);
-    color: rgb(213, 202, 223);;
+    color: #FFF;
     border-radius: 50%;
     margin: 10px;
     width: 50px;
@@ -93,4 +102,95 @@
     color:rgb(213, 202, 223);
   }
   
+  .cambio{
+    width: 100%;
+    display: flex;
+    margin: left 20px;
+    justify-content: center;
+    margin-right: 35px;
+  }
+  .lograndolo{
+    width: 33%;
+    display: flex;
+    justify-content: center;
+  }
+  .ordena{
+    width: 33%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .buscadore{
+    display: flex;
+    flex-direction: row;
+  }
+  .busca{
+    width: 33%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+  }
+  .busca input{
+    margin-right: -15px;
+    border: none;
+    background-color: #fdfdfde3;
+    border-bottom: 1px solid rgb(213, 202, 223);
+    color: rgb(50, 22, 76);
+    outline: none;
+    padding: 9px;
+    width: 40%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 500;
+    font-size: medium;
+  }
+
+.checkradio{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: 300;
+  color: rgb(76, 22, 70);
+  justify-content: center;
+}
   
+
+.ordena button{
+  border: 3px solid rgb(213, 202, 223);
+  background-color: #fff;
+  color: rgb(76, 22, 70);
+  padding: 8px;
+  width: 100px;
+  margin: 0px;
+  border-radius: 5%;
+  cursor: pointer;
+  transition: .5s all;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: 500;
+  font-size:small;
+}
+
+.ordena button:hover{
+  border: 2px solid rgb(213, 202, 223);
+  background-color: rgb(213, 202, 223);
+  color: rgb(76, 22, 70);
+}
+
+
+.inputas {
+  margin: 20px;
+} 
+
+
+@media screen and (max-width:800px){
+
+  .buscadore{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -270px;
+  }
+  .ordena{
+    visibility: collapse;
+  }
+  .busca{
+    visibility: collapse;
+  }
+}

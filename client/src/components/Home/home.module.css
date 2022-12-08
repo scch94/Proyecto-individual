@@ -53,10 +53,11 @@ video{
    .cta span {
     position: relative;
     font-family: "Ubuntu", sans-serif;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
     letter-spacing: 0.05em;
     color: #234567;
+    text-decoration: none;
    }
    .cta svg {
     position: relative;
