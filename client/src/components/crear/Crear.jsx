@@ -17,44 +17,49 @@ export const Crear = () => {
     let temperamentos=useSelector(state=>state.temperaments)
     let id=useSelector(state=>state.max)
     let dispatch=useDispatch();
+
+
     function handleChange(e){
         e.preventDefault();
         setInput((prev)=>({...prev,[e.target.name]:e.target.value}))
-        //validacion nombre que no sea menor a 2 ni mayor a 15
-        if(e.target.name==="name"){
-            if(!/^[\s\S]{3,15}$/.test(e.target.value)) {
-                setError((prev)=>({...prev,name:"el nombre debe tener entre 2 y 15 letras"}));
-            } else {
-                setError((prev)=>({...prev,[e.target.name]:""}));
-            }
-        }
-        //validando que el peso minimo no pueda ser mayores al maximo 
+        
+        //validaciones
 
-        if(e.target.name==="heightMin"||e.target.name==="heightMax"){
-            if(parseInt(input.heightMin)>parseInt(input.heightMax)){
-                console.log(parseInt(input.heightMin)+" "+parseInt(input.heightMax))
-                setError((prev)=>({...prev,heightMin:"el valor minimo debe ser inferior al maximo"}));
-            }else{
-                setError((prev)=>({...prev,heightMin:""}));
-            }
-        }
-        //validando que la altura minima no pueda ser mayyor al maximo
-        if(e.target.name==="weightMin"||e.target.name==="weightMax"){
-            if(parseInt(input.weightMin)>parseInt(input.weightMax)){
-                setError((prev)=>({...prev,weightMin:"el valor minimo debe ser inferior al maximo"}));
-            }else{
-                setError((prev)=>({...prev,weightMin:""}));
-            }
-        }
-        //validando que la edad sea mayor a 0
-        if(e.target.name==="life_span"){
-            if(parseInt(input.life_span)<=0){
-                setError((prev)=>({...prev,life_span:"el valor del promedio de edad debe ser un numero mayor a 0"}));
-            }else{
-                setError((prev)=>({...prev,life_span:""}));
-            }
-        }
+        let objError=validate({...input,[e.target.name]:e.target.value})
+        setError(objError)
     };
+    function validate(input){
+        let error={};
+        //nombre
+        if(!input.name){
+            error.name="Nombre de raza requerido"
+        }else if(!/^[\s\S]{2,15}$/.test(input.name)) {
+            error.name="NOMBRE debe tener entre 2 y 15 letras";
+        }
+        //height
+        if(!input.heightMin||!input.heightMax){
+            error.heightMin="Altura es requerida (min y max)"
+        }else if(parseInt(input.heightMin)>parseInt(input.heightMax)){
+            error.heightMin="Altura minima debe ser inferior a la maxima";
+        }
+        //weight
+        if(!input.weightMin||!input.weightMax){
+            error.weightMin="Peso es requerido (min y max)"
+        }else if(parseInt(input.weightMin)>parseInt(input.weightMax)){
+            error.heightMin="peso minima debe ser inferior a la maxima";
+        }
+        //edad
+        if(!input.life_span){
+            error.life_span="los años promedios son requeridos"
+        }else if(parseInt(input.life_span)<=0){
+            error.life_span="los años no pueden ser inferiores a 0"
+        };
+        //temperemento
+        if(!input.temperament){
+            error.temperament="debes seleccionar al menos un temperamento";
+        }
+        return error;
+    }
     //permite agregar temperamentos del form
     function agregarTemperamentos(e){
         console.log(creadorT)
@@ -118,7 +123,7 @@ export const Crear = () => {
                 <div className={s.contenedor_tarjeta}>
                     {
                         activar===true?<Perro key={id} id={id} image={imagen} name={input.name} temperament={temp} weight={`entre ${input.weightMin} y ${input.weightMax}`}/>:(
-                            <div>
+                            <div className={s.errores}>
                                 {
                                     error.name===""?<br />:<p>{error.name}</p>
                                 }
@@ -138,7 +143,7 @@ export const Crear = () => {
                 {" "}
                 <div className={s.contenedor_formulario}>
                     <h2>crear raza</h2>
-                        <div className={s.busca}>
+                        <div className={error.name? (s.danger):(s.busca)}>
                             <input placeholder="Nombre"  type="text" name='name' value={input.name} onChange={(e)=>handleChange(e)}/>
                         </div>
                         <br />

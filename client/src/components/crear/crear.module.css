@@ -76,3 +76,26 @@
     color: #939393;
 }
   
+.danger input{
+    margin: 0px 15px;
+    border: none;
+    background-color: #fdfdfde3;
+    border-bottom: 3px solid rgb(255, 0, 0);
+    border-radius: 20px;
+    color: rgb(255, 0, 0);
+    outline: none;
+    padding: 9px;
+    width: 120px;
+    height: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 500;
+    font-size: medium;
+}
+
+.errores{
+    background-color: #fff;
+    border: 2px solid rgb(234, 134, 134);
+    border-radius: 10px;
+    width: 320px;
+    padding: 50px;
+}
