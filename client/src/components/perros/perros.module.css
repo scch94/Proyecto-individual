@@ -180,17 +180,23 @@
 
 
 @media screen and (max-width:800px){
-
+  .todo{
+    display: flex;
+    flex-direction: column-reverse;
+  }
   .buscadore{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: -270px;
   }
   .ordena{
     visibility: collapse;
   }
   .busca{
     visibility: collapse;
+  }
+  .lograndolo{
+    width: 100%;
+    margin-top: -260px;
   }
 }
