@@ -7,7 +7,7 @@ import s from './perros.module.css'
 export const Perros = () => {
     //buscador
     let [buscar, setBuscar] = useState("")
-    let [busquedaPor, setBusquedaPor] = useState("elige")
+    let [busquedaPor, setBusquedaPor] = useState("name")
     //paginacion
     let rasas = useSelector(state => state.dogs)
     const [items, setItems] = useState([...rasas])
@@ -21,6 +21,7 @@ export const Perros = () => {
         //dependiendo de que variable este en ordenamiento se activara algun orden 
         //utilizamos el metodo sort para ordenar los objetos
         if (ordenamiento === "Alfabetico [A-Z]") {
+            console.log("orden ",items)
             orden = items.sort((a, b) => {
                 if (a.name < b.name) return -1
                 if (a.name > b.name) return 1

@@ -38,31 +38,28 @@ export const Crear = () => {
         }
         //height
         if(!input.heightMin||!input.heightMax){
-            error.heightMin="Altura es requerida (min y max)"
+            error.heightMin="ALTURA es requerida (min y max)"
         }else if(parseInt(input.heightMin)>parseInt(input.heightMax)){
             error.heightMin="Altura minima debe ser inferior a la maxima";
         }
         //weight
         if(!input.weightMin||!input.weightMax){
-            error.weightMin="Peso es requerido (min y max)"
+            error.weightMin="PESO es requerido (min y max)"
         }else if(parseInt(input.weightMin)>parseInt(input.weightMax)){
-            error.heightMin="peso minima debe ser inferior a la maxima";
+            error.heightMin="PESO minima debe ser inferior a la maxima";
         }
         //edad
         if(!input.life_span){
-            error.life_span="los años promedios son requeridos"
+            error.life_span="AÑOS promedio son requeridos"
         }else if(parseInt(input.life_span)<=0){
-            error.life_span="los años no pueden ser inferiores a 0"
+            error.life_span="AÑOS no pueden ser inferiores a 0"
         };
         //temperemento
-        if(!input.temperament){
-            error.temperament="debes seleccionar al menos un temperamento";
-        }
         return error;
     }
     //permite agregar temperamentos del form
     function agregarTemperamentos(e){
-        console.log(creadorT)
+        alert(`agregaste el temperamento ${input.temperament} a la raza ${input.name}`)
         e.preventDefault();
         let f
         if(creadorT===0)f=input.temperament
@@ -82,7 +79,7 @@ export const Crear = () => {
         temperamento = [...set];
         temperamento=temperamento.toString()
         setTemp(temperamento)
-        let weight=((input.heightMax+input.heightMin)/2)
+        let weight=((parseInt(input.heightMax)+parseInt(input.heightMin))/2)
         let datos={
             name:input.name,
             height:`entre ${input.heightMin} y ${input.heightMax}`,
@@ -92,6 +89,7 @@ export const Crear = () => {
             img:imagen, 
             temperament:temperamento
         }
+        console.log("estos son los datos a la hora de enviarlos al back",datos)
         let url="http://localhost:3001/dogs"
         fetch(url,{
             headers: {
@@ -147,40 +145,45 @@ export const Crear = () => {
                             <input placeholder="Nombre"  type="text" name='name' value={input.name} onChange={(e)=>handleChange(e)}/>
                         </div>
                         <br />
-                        <div className={s.busca}>
+                        <div className={error.heightMin? (s.danger):(s.busca)}>
                             <input placeholder="Altura min"  type="number" name='heightMin' value={input.heightMin} onChange={(e)=>handleChange(e)}/>
                             {""}
                             <input placeholder="Altura max" type="number" name='heightMax' value={input.heightMax} onChange={(e)=>handleChange(e)}/>
                         </div>
                         <br />
-                        <div className={s.busca}>
+                        <div className={error.weightMin? (s.danger):(s.busca)}>
                             <input placeholder='Peso min' type="number" name='weightMin' value={input.weightMin} onChange={(e)=>handleChange(e)}/>
                             <input placeholder='Peso max' type="number" name='weightMax' value={input.weightMax} onChange={(e)=>handleChange(e)}/>
                         </div>
                         <br />
-                        <div className={s.busca}>
+                        <div className={error.life_span? (s.danger):(s.busca)}>
                             <input  placeholder="Años promedio" type="number" name='life_span'value={input.life_span} onChange={(e)=>handleChange(e)}/>
                         </div>
                         <br />
-                        <div className={s.busca}>
-                            <label >temperamento</label>
-                            <select name="temperament" value={input.temperament} onChange={(e)=>handleChange(e)}>
-                                {
-                                    temperamentos.map((t,i)=><option value={t} key={i}>{t}</option>)
-                                }
-                            </select>
-                            {" "}
-                            {/* <button onClick={(e)=>agregarTemperamentos(e)}>+</button> */}
+                        <div className={error.temperament? (s.danger):(s.busca)}>
+                        <br />
+                            <div className={s.botontemp}>
+                                <button  onClick={(e)=>agregarTemperamentos(e)}>agregar temp</button>
+                            </div>
+                            <div className={s.display}>
+                                <select name="temperament" value={input.temperament} onChange={(e)=>handleChange(e)}>
+                                    {
+                                        temperamentos.map((t,i)=><option value={t} key={i}>{t}</option>)
+                                    }
+                                </select>       
+                            </div>
+                            
                         </div>
                         <br />
-                        <div className={s.busca}>
-                            <input placeholder="ruta de la imagen" type="text" id="imagen"value={imagen} onChange={(e=>setImagen(e.target.value))} />
+                        <div className={error.name? (s.danger):(s.busca)}>
+                            <input placeholder="ruta de la imagen" type="text" id="imagen"value={imagen} onChange={e=>setImagen(e.target.value)} />
                         </div>
                         <br />
-                        <div className={s.busca}>
+                        <div className={error.name? (s.danger):(s.busca)}>
                             {
-                                JSON.stringify(error)===JSON.stringify({name:"", heightMin:"", weightMin:"", life_span:"", temperament:""})?(
+                                (!Object.keys(error).length>0)?(
                                 <>
+                    
                                 <button  onClick={(e)=>crear(e)}>enviar</button>
                                 {" "}
                                 <button onClick={(e)=>observar(e)}>ver tarjeta</button>

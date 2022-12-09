@@ -91,7 +91,6 @@ router.get("/", async (req, res) => {
                 let temperamentos=r.Temperamentos.map(temp=>temp.name)
                 temperamentos=temperamentos.toString();
                 temperamentos= temperamentos.replaceAll(',',', ')
-                console.log(temperamentos)
                 return (
                     {
                         id:r.id,
@@ -107,51 +106,44 @@ router.get("/", async (req, res) => {
         .catch((e) => res.status(404).send(e));
 });
 
-router.get('/:idRaza', (req,res)=>{
+router.get('/:idRaza', async (req,res)=>{
     let {idRaza}=req.params
-    url=`https://api.thedogapi.com/v1/breeds/${idRaza}`
-    axios
-        .get(url)
-        .then((response) => (response = response.data))
-        .then((razas)=>{
-            console.log(razas)
-            res.send({
-                id:razas.id,
-                name: razas.name,
-                temperament: razas.temperament,
-                weight: razas.weight.metric,
-                height: razas.height.metric,
-                life_span: razas.life_span
+    let temperamentos
+    try{
+        let rasa=await Raza.findByPk(idRaza,{include:Temperamento})
+        if (rasa.Temperamentos){
+            temperamentos=rasa.Temperamentos.map(t=>{
+                return t.name
             })
-        })
-        .catch((e)=>res.status(404).send(e))
-    // try{
-    //     let rasa=await Raza.findByPk(idRaza,{include:Temperamento})
-    //     res.send(
-    //         {
-    //             id:rasa.id,
-    //             name:rasa.name,
-    //             height:rasa.height,
-    //             weight:rasa.weight,
-    //             image:rasa.image,
-    //             Temperamentos:rasa.Temperamentos
-    //         })
-    // }catch(e){
-    //     res.status(400).send(e)
-    // }
+            temperamentos=temperamentos.toString()
+            temperamentos=temperamentos.replaceAll(',',', ')
+        }else {temperamentos=[]}
+        res.send(
+            {
+                life_span:rasa.life_span,
+                id:rasa.id,
+                name:rasa.name,
+                height:rasa.height,
+                weight:rasa.weight,
+                image:rasa.image,
+                temperament:temperamentos
+            })
+    }catch(e){
+        res.status(400).send(e)
+    }
 })
 
 //crear un perro
 
 router.post("/", async (req, res) => {
     let { name, height, weight, life_span, id, img , temperament} = req.body;
+    console.log(req.body)
     let separando
     try {
-        console.log(1)
         if (!name || !height || !weight) {
         res.status(404).send("datos incompletos");
         } else {
-        let nuevo = await Raza.create({ name, height, weight, life_span, id ,img});
+        let nuevo = await Raza.create({ name, height, weight, life_span, id ,image:img});
         if (temperament) {
             console.log(temperament)
             separando = temperament.split(",");

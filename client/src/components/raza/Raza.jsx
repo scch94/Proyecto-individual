@@ -9,11 +9,26 @@ export const Raza =({razas}) => {
     let img=useSelector(state=>state.dog)
     // setImg(a)
     useEffect(()=>{
-        fetch(`http://localhost:3001/dogs/${id}`)
-        .then(response=>response.json())
-        .then(perro=>{
-            setRaza(perro)
-        })
+        if(id<265){
+            fetch(`https://api.thedogapi.com/v1/breeds/${id}`)
+            .then(response=>response.json())
+            .then(razas=>{
+                setRaza({
+                    name: razas.name,
+                    temperament: razas.temperament,
+                    weight: razas.weight.metric,
+                    height: razas.height.metric,
+                    life_span: razas.life_span
+                })
+            })
+        }
+        else{
+            fetch(`http://localhost:3001/dogs/${id}`)
+            .then(response=>response.json())
+            .then(perro=>{
+                setRaza(perro)
+            })
+        }
     },[id])
     return (
         <>

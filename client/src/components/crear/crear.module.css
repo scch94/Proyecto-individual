@@ -1,6 +1,6 @@
 .pocicion{
     width: 100%;
-    height: 100vh;
+    height: 70vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -62,7 +62,7 @@
   padding: 0px;
   width: 80px;
   height: 30px;
-  margin: -10px 15px;
+  margin: 0px 15px;
   border-radius: 10%;
   cursor: pointer;
   transition: .5s all;
@@ -94,8 +94,23 @@
 
 .errores{
     background-color: #fff;
-    border: 2px solid rgb(234, 134, 134);
     border-radius: 10px;
     width: 320px;
     padding: 50px;
+    display: flex ;
+    flex-direction: column;   
+    justify-content: center;
+    align-items: center;
+    color: red;
+    font-weight: 700;
+}
+
+.botontemp button{
+    width: 100px;
+    height: 35px;
+}
+.display select{
+    background-color: none;
+    border: none;
+    color: #939393;
 }
