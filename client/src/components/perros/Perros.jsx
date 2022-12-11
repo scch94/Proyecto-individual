@@ -141,8 +141,9 @@ export const Perros = () => {
                     <div className={s.busca}>
                         <input type="text" name='buscar' value={buscar} onChange={(e) => handleChange(e)} placeholder="busqueda por ...." />
                         <div className={s.bajar}  >
-                            <input type="radio" name='busquedaPor' value="name" onChange={(e) => setBusquedaPor(e.target.value)} /><span className={s.checkradio}>nombre</span>
-                            <input type="radio" name="busquedaPor" value="temperament" onChange={(e) => setBusquedaPor(e.target.value)} /><span className={s.checkradio}>temperamento</span>
+                            <input type="radio" name='busquedaPor' value="name" onChange={(e) =>{ setBusquedaPor(e.target.value);setBuscar("")}}
+                            /><span className={s.checkradio}>nombre</span>
+                            <input type="radio" name="busquedaPor" value="temperament" onChange={(e) => {setBusquedaPor(e.target.value); setBuscar("")} }/><span className={s.checkradio}>temperamento</span>
                         </div>
                         
                         
