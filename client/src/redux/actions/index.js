@@ -1,6 +1,9 @@
 export const getDogs =()=>dispatch=>{
     return(
-        fetch('http://localhost:3001/dogs')
+        fetch('http://localhost:3001/dogs',{
+            method: 'GET',
+            mode: 'no-cors'
+        })
         .then(response=>response.json())
         .then(perros=>dispatch({type:'GET_PERROS',payload:perros}))
     )
@@ -8,7 +11,10 @@ export const getDogs =()=>dispatch=>{
 
 export const getTemperaments=()=>dispatch=>{
     return(
-        fetch('http://localhost:3001/temperaments')
+        fetch('http://localhost:3001/temperaments',{
+            method: 'GET',
+            mode: 'no-cors'
+        })
         .then(response=>response.json())
         .then(temperamentos=>dispatch({type:'GET_TEMPERAMENTS',payload:temperamentos}))
     )
