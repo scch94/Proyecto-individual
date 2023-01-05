@@ -15,6 +15,7 @@ export const Perros = () => {
     const [paginaActual, setPaginaActual] = useState(0);
     //ordenar
     let [ordenamiento, setordenamiento] = useState("Alfabetico [A-Z]")
+    const [existe,setExiste]=useState("lleno")
     function ordenar() {
         console.log(ordenamiento)
         let orden
@@ -84,8 +85,6 @@ export const Perros = () => {
     function handleChange(e) {
         if (busquedaPor === "elige") return
         setBuscar(e.target.value)
-        console.log(e.target.value)
-        console.log(busquedaPor)
         let buscador = rasas.filter(a => {
             if (!a[busquedaPor]) {
                 return false
@@ -96,10 +95,16 @@ export const Perros = () => {
         setPaginaActual(0)
         setRasase([...buscador].splice(0, 8))
         setItems([...buscador])
+        if(buscador.length<1){
+            setExiste("vacio")
+        }else{
+            setExiste("lleno")
+        }
     }
     return (
+
         <>
-            <div className={s.todo}>
+        <div className={s.todo}>
                 <div className={s.buscadore}>
                     <div className={s.ordena}>
                         <button onClick={ordenar}>ORDEN</button>
@@ -150,15 +155,20 @@ export const Perros = () => {
                     </div>
 
                 </div>
+        {existe!=="vacio"?(
                 <div className={s.contenedor}>
                     <div className={s.razas}>
                         {
                             rasase.map(r => <Perro key={r.id} id={r.id} image={r.image} name={r.name} temperament={r.temperament} weight={r.weight} />)
-                            // ventas.map((v,i)=><Venta venta={v} index={i}/>)
                         }
                     </div>
                 </div>
-            </div>
+            ):(
+                <div className={s.sininfo}>
+                    <h1>No se encontraron razas en tu busqueda</h1>
+                </div>
+            )}
+        </div>
         </>
 
     )

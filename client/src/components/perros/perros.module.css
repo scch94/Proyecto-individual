@@ -178,6 +178,11 @@
   margin: 20px;
 } 
 
+.sininfo {
+  justify-content: center;
+  text-align: center;
+  color: rgb(76, 22, 70);
+}
 
 @media screen and (max-width:800px){
   .todo{

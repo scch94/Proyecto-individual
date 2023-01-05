@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import s from './crear.module.css'
 import { Perro } from '../perro/Perro'
 import * as actions from '../../redux/actions/index'
+import { Link } from 'react-router-dom'
 
 
 export const Crear = () => {
@@ -36,23 +37,28 @@ export const Crear = () => {
         }else if(!/^[\s\S]{2,15}$/.test(input.name)) {
             error.name="NOMBRE debe tener entre 2 y 15 letras";
         }
-        //height
-        if(!input.heightMin||!input.heightMax){
-            error.heightMin="ALTURA es requerida (min y max)"
-        }else if(parseInt(input.heightMin)>parseInt(input.heightMax)){
-            error.heightMin="Altura minima debe ser inferior a la maxima";
-        }
         //weight
         if(!input.weightMin||!input.weightMax){
             error.weightMin="PESO es requerido (min y max)"
         }else if(parseInt(input.weightMin)>parseInt(input.weightMax)){
             error.heightMin="PESO minima debe ser inferior a la maxima";
+        }else if(parseInt(input.weightMin)>999||parseInt(input.weightMax)>999){
+            error.heightMin="PESO demasiado alto"
         }
+        //height
+        if(!input.heightMin||!input.heightMax){
+            error.heightMin="ALTURA es requerida (min y max)"
+        }else if(parseInt(input.heightMin)>parseInt(input.heightMax)){
+            error.heightMin="Altura minima debe ser inferior a la maxima";
+        }else if(parseInt(input.heightMin)>999||parseInt(input.heightMax)>999){
+            error.heightMin="altura demasiado alta"
+        }     
+        
         //edad
         if(!input.life_span){
             error.life_span="AÑOS promedio son requeridos"
-        }else if(parseInt(input.life_span)<=0){
-            error.life_span="AÑOS no pueden ser inferiores a 0"
+        }else if(parseInt(input.life_span)<=0||parseInt(input.life_span)>20){
+            error.life_span="AÑOS no pueden ser inferiores a 0 ni mayor 20"
         };
         //temperemento
         return error;
@@ -89,7 +95,6 @@ export const Crear = () => {
             img:imagen, 
             temperament:temperamento
         }
-        console.log("estos son los datos a la hora de enviarlos al back",datos)
         let url="http://localhost:3001/dogs"
         fetch(url,{
             headers: {
@@ -103,6 +108,7 @@ export const Crear = () => {
         .then(response=>console.log(response))
         dispatch(actions.postRaza({id:id,name:input.name,temperament:temperamento,weight:weight,image:imagen}))
         dispatch(actions.aumentarMax())
+        alert(`creaste la raza ${input.name}`)
     }
     //abilita la pantalla de previsualisacion de la card
     function observar(e){
@@ -172,9 +178,24 @@ export const Crear = () => {
                                     }
                                 </select>       
                             </div>
-                            
                         </div>
+
                         <br />
+                        {/* <div className={s.busca}>
+                        <br />
+                            <div className={s.botontemp}>
+                                <button  onClick={(e)=>quitarTemperamento(e)}>quitar Temp</button>
+                            </div>
+                            <div className={s.display}>
+                                <select name="temperament" value={input.temperament} onChange={(e)=>handleChange(e)}>
+                                    {
+                                        temperamentos.map((t,i)=><option value={t} key={i}>{t}</option>)
+                                    }
+                                </select>       
+                            </div>
+                        </div>
+
+                        <br /> */}
                         <div className={error.name? (s.danger):(s.busca)}>
                             <input placeholder="ruta de la imagen" type="text" id="imagen"value={imagen} onChange={e=>setImagen(e.target.value)} />
                         </div>
@@ -184,7 +205,7 @@ export const Crear = () => {
                                 (!Object.keys(error).length>0)?(
                                 <>
                     
-                                <button  onClick={(e)=>crear(e)}>enviar</button>
+                                <button  onClick={(e)=>crear(e)}><Link to='/dogs'>enviar</Link></button>
                                 {" "}
                                 <button onClick={(e)=>observar(e)}>ver tarjeta</button>
                                 </>):(
